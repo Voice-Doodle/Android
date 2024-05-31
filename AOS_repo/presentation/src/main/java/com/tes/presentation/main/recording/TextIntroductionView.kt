@@ -1,6 +1,5 @@
 package com.tes.presentation.main.recording
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,25 +18,25 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.media3.exoplayer.ExoPlayer
 import com.tes.presentation.main.MainViewEvent
 import com.tes.presentation.main.MainViewModel
-import com.tes.presentation.model.VoiceType
+import com.tes.presentation.main.MainViewState
 import com.tes.presentation.theme.Padding
 import com.tes.presentation.theme.vodleTypoGraphy
-import com.tes.presentation.utils.MediaPlayer
 import main.components.ButtonComponent
 
 @Composable
 internal fun TextIntroductionView(
     viewModel: MainViewModel,
     selectedVoiceIndex: MutableIntState,
-    voiceTypeList: List<VoiceType>,
-    context: Context
+    viewState: MainViewState.MakingVodle,
+    player: ExoPlayer
 ) {
     Dialog(
         onDismissRequest = {
             viewModel.onTriggerEvent(MainViewEvent.OnDismissRecordingDialog)
-            MediaPlayer.stopSample()
+            player.stop()
         }
     ) {
         Box(
@@ -61,7 +60,7 @@ internal fun TextIntroductionView(
                     text = "목소리 선택",
                     style = vodleTypoGraphy.bodyMedium
                 )
-                VoiceSelector(selectedVoiceIndex, voiceTypeList)
+                VoiceSelector(selectedVoiceIndex, viewState)
 
                 Spacer(modifier = Modifier.height(40.dp))
 
@@ -69,7 +68,7 @@ internal fun TextIntroductionView(
                     buttonText = "보들 만들기",
                     onClick = {
                         viewModel.onTriggerEvent(MainViewEvent.OnClickMakingVodleButton)
-                        MediaPlayer.stopSample()
+                        player.stop()
                     },
                     buttonTextStyle = vodleTypoGraphy.titleMedium
                 )

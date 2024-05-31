@@ -5,6 +5,7 @@ import com.tes.domain.model.Location
 import com.tes.vodle.model.BasicResponse
 import com.tes.vodle.model.vodle.ConversionResponse
 import com.tes.vodle.model.vodle.VodlesAroundResponse
+import com.tes.vodle.model.vodle.VoiceInfoResponse
 import java.io.File
 
 interface VodleDataSource {
@@ -33,4 +34,6 @@ interface VodleDataSource {
         content: String,
         selectedVoice: String
     ): Result<ConversionResponse>
+
+    suspend fun fetchVoiceInfo(): Result<VoiceInfoResponse>
 }

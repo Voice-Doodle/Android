@@ -1,16 +1,18 @@
 package com.tes.domain.model
 
-enum class VoiceType {
-    AHRI, MUNDO, OPTIMUSPRIME, TRUMP, ELSA, ORIGINAL
-}
+data class VoiceInfo(
+    val voiceType: String,
+    val sampleUrl: String,
+    val voiceTypeKr: String
+)
 
 enum class Gender(val value: String) {
     Male("male"), Female("female")
 }
 
 data class AudioData(
-    val voiceType: VoiceType,
-    val convertedAudioUrl: Url
+    val voiceType: String,
+    val convertedAudioUrl: Url,
 )
 
 typealias Url = String

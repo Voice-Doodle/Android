@@ -38,7 +38,7 @@ import com.tes.presentation.main.recording.TypingDialog
 @Composable
 internal fun MainScreen(
     viewModel: MainViewModel = hiltViewModel<MainViewModel>(),
-    onClickUserButton: () -> Unit
+    onClickUserButton: () -> Unit,
 ) {
     val viewState = viewModel.uiState.collectAsState().value
 
@@ -48,10 +48,14 @@ internal fun MainScreen(
 
     val scope = rememberCoroutineScope()
 
-    val player = ExoPlayer.Builder(LocalContext.current).build()
+    val player = remember { ExoPlayer.Builder(context).build() }
     val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
 
     val snackBarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(Unit) {
+        viewModel.onTriggerEvent(MainViewEvent.Init)
+    }
 
     ObserveToastMessage(
         viewState = viewState,
@@ -124,7 +128,7 @@ internal fun MainScreen(
 
     if (viewState is MainViewState.MakingVodle) {
         when (viewState.recordingStep) {
-            RecordingStep.INTRODUCTION -> IntroDuctionDialog(viewModel, viewState)
+            RecordingStep.INTRODUCTION -> IntroDuctionDialog(viewModel, viewState, player)
             RecordingStep.RECORDING -> RecordingDialog(viewModel, viewState)
             RecordingStep.CREATE -> CreateVodleDialog(
                 viewModel,
@@ -145,7 +149,7 @@ internal fun MainScreen(
 private fun ObserveToastMessage(
     viewState: MainViewState,
     snackBarHostState: SnackbarHostState,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
 ) {
     LaunchedEffect(key1 = viewState.toastMessage) {
         if (viewState.toastMessage.isNotEmpty()) {

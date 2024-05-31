@@ -11,6 +11,7 @@ import com.tes.vodle.model.vodle.ConversionResponse
 import com.tes.vodle.model.vodle.TTSConversionRequest
 import com.tes.vodle.model.vodle.VodlesAroundRequest
 import com.tes.vodle.model.vodle.VodlesAroundResponse
+import com.tes.vodle.model.vodle.VoiceInfoResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -84,4 +85,8 @@ class VodleDataSourceImpl @Inject constructor(
         runCatching {
             vodleService.convertTTS(TTSConversionRequest(content, selectedVoice))
         }
+
+    override suspend fun fetchVoiceInfo(): Result<VoiceInfoResponse> = runCatching {
+        vodleService.fetchVoiceTypes()
+    }
 }

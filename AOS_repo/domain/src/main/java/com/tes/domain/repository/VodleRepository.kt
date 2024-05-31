@@ -5,6 +5,7 @@ import com.tes.domain.model.Gender
 import com.tes.domain.model.Location
 import com.tes.domain.model.RecordType
 import com.tes.domain.model.Vodle
+import com.tes.domain.model.VoiceInfo
 import java.io.File
 
 interface VodleRepository {
@@ -33,4 +34,6 @@ interface VodleRepository {
         content: String,
         selectedVoice: String
     ): Result<AudioData>
+
+    suspend fun fetchVoiceInfo(): Result<List<VoiceInfo>>
 }

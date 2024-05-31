@@ -50,7 +50,6 @@ import com.tes.presentation.main.MainViewModel
 import com.tes.presentation.main.MainViewState
 import com.tes.presentation.main.components.LoadingScreen
 import com.tes.presentation.model.VodleOption
-import com.tes.presentation.model.VoiceType
 import com.tes.presentation.theme.Padding
 import com.tes.presentation.theme.main_coral_bright
 import com.tes.presentation.theme.main_coral_darken
@@ -73,7 +72,7 @@ internal fun CreateVodleDialog(
         VodleOption.TEXT -> RecordType.TTS
         VodleOption.VOICE -> {
             when (viewState.selectedVoiceType) {
-                VoiceType.ORIGINAL -> RecordType.NONE
+                "original" -> RecordType.NONE
                 else -> RecordType.STS
             }
         }

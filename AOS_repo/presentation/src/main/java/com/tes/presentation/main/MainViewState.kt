@@ -7,7 +7,7 @@ import com.tes.presentation.model.AudioData
 import com.tes.presentation.model.Location
 import com.tes.presentation.model.Vodle
 import com.tes.presentation.model.VodleOption
-import com.tes.presentation.model.VoiceType
+import com.tes.presentation.model.VoiceInfo
 import java.io.File
 
 sealed class MainViewState : ViewState {
@@ -15,12 +15,14 @@ sealed class MainViewState : ViewState {
     abstract val isLoading: Boolean
     abstract val toastMessage: String
     abstract val vodleList: List<Vodle>
+    abstract val voiceInfoList: List<VoiceInfo>
 
     data class Default(
         override val vodleMap: HashMap<Location, List<Vodle>> = HashMap<Location, List<Vodle>>(),
         override val toastMessage: String = "",
         override val vodleList: List<Vodle> = emptyList(),
-        override val isLoading: Boolean = false
+        override val isLoading: Boolean = false,
+        override val voiceInfoList: List<VoiceInfo> = listOf(VoiceInfo("original", "", "내 목소리")),
     ) : MainViewState()
 
     data class MakingVodle(
@@ -32,9 +34,10 @@ sealed class MainViewState : ViewState {
         val location: Location,
         val convertedAudio: AudioData,
         val recordingFile: File = File("none"),
-        val selectedVoiceType: VoiceType = VoiceType.ORIGINAL,
+        val selectedVoiceType: String = "original",
         val gender: Gender = Gender.Male,
-        override val isLoading: Boolean = false
+        override val isLoading: Boolean = false,
+        override val voiceInfoList: List<VoiceInfo> = listOf(),
     ) : MainViewState()
 
     data class ShowRecordedVodle(
@@ -43,6 +46,7 @@ sealed class MainViewState : ViewState {
         override val vodleList: List<Vodle>,
         override val isLoading: Boolean = false,
         val dialogVodleList: List<Vodle>,
-        val myLocation: Location
+        val myLocation: Location,
+        override val voiceInfoList: List<VoiceInfo> = listOf(),
     ) : MainViewState()
 }

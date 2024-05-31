@@ -13,13 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.media3.exoplayer.ExoPlayer
 import com.tes.domain.model.Gender
 import com.tes.presentation.main.MainViewEvent
 import com.tes.presentation.main.MainViewModel
-import com.tes.presentation.model.VoiceType
+import com.tes.presentation.main.MainViewState
 import com.tes.presentation.theme.Padding
 import com.tes.presentation.theme.vodleTypoGraphy
-import com.tes.presentation.utils.MediaPlayer
 import com.tes.presentation.utils.RecordingModule
 import main.components.BasicDialog
 import main.components.ButtonComponent
@@ -29,13 +29,14 @@ internal fun VoiceIntroductionView(
     viewModel: MainViewModel,
     selectedGenderState: MutableState<Gender>,
     selectedVoiceIndex: MutableIntState,
-    voiceTypeList: List<VoiceType>,
-    context: Context
+    viewState: MainViewState.MakingVodle,
+    context: Context,
+    player:ExoPlayer
 ) {
     Dialog(
         onDismissRequest = {
             viewModel.onTriggerEvent(MainViewEvent.OnDismissRecordingDialog)
-            MediaPlayer.stopSample()
+            player.stop()
         }
     ) {
         BasicDialog {
@@ -59,7 +60,7 @@ internal fun VoiceIntroductionView(
                     text = "변경할 목소리 선택",
                     style = vodleTypoGraphy.bodyMedium
                 )
-                VoiceSelector(selectedVoiceIndex, voiceTypeList)
+                VoiceSelector(selectedVoiceIndex, viewState)
 
                 Spacer(modifier = Modifier.weight(1f))
 
@@ -69,7 +70,7 @@ internal fun VoiceIntroductionView(
                         RecordingModule.recordingPermissionCheck(context).fold(
                             onSuccess = {
                                 viewModel.onTriggerEvent(MainViewEvent.OnClickMakingVodleButton)
-                                MediaPlayer.stopSample()
+                                player.stop()
                             },
                             onFailure = {
                                 viewModel.onTriggerEvent(

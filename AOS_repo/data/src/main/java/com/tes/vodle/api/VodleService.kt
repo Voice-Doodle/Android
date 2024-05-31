@@ -6,8 +6,10 @@ import com.tes.vodle.model.vodle.ConversionResponse
 import com.tes.vodle.model.vodle.TTSConversionRequest
 import com.tes.vodle.model.vodle.VodlesAroundRequest
 import com.tes.vodle.model.vodle.VodlesAroundResponse
+import com.tes.vodle.model.vodle.VoiceInfoResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -42,6 +44,9 @@ interface VodleService {
     suspend fun convertTTS(
         @Body ttsConversionRequest: TTSConversionRequest
     ): ConversionResponse
+
+    @GET("api/vodle/samples")
+    suspend fun fetchVoiceTypes(): VoiceInfoResponse
 }
 
 data class VodleMetaData(

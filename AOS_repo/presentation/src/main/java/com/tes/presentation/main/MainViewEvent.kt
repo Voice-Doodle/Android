@@ -5,10 +5,11 @@ import com.tes.domain.model.RecordType
 import com.tes.presentation.composebase.ViewEvent
 import com.tes.presentation.model.Location
 import com.tes.presentation.model.VodleOption
-import com.tes.presentation.model.VoiceType
 import java.io.File
 
 sealed class MainViewEvent : ViewEvent {
+
+    data object Init: MainViewEvent()
 
     data class OnClickSearchVodleButton(
         val centerLocation: Location,
@@ -30,13 +31,13 @@ sealed class MainViewEvent : ViewEvent {
     data object OnClickMakingVodleButton : MainViewEvent()
     data class OnClickFinishRecordingButton(
         val recordingFile: File,
-        val selectedVoiceType: VoiceType,
+        val selectedVoiceType: String,
         val gender: Gender
     ) : MainViewEvent()
 
     data class OnClickFinishTypingButton(
         val text: String,
-        val selectedVoiceType: VoiceType
+        val selectedVoiceType: String
     ) : MainViewEvent()
 
     data class OnClickSaveVodleButton(
@@ -57,7 +58,7 @@ sealed class MainViewEvent : ViewEvent {
 
     data class OnFailMakingVodle(val toastMessage: String) : MainViewEvent()
 
-    data class OnSelectVoiceType(val voiceType: VoiceType) : MainViewEvent()
+    data class OnSelectVoiceType(val voiceType: String) : MainViewEvent()
 
     data class OnSelectGender(val gender: Gender) : MainViewEvent()
 

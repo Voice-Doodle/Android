@@ -17,11 +17,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.tes.presentation.R
-import com.tes.presentation.model.VoiceType
+import com.tes.presentation.main.MainViewState
+import com.tes.presentation.model.VoiceInfo
 import com.tes.presentation.theme.vodleTypoGraphy
 
 @Composable
-fun VoiceSelector(selectedVoice: MutableIntState, voiceTypeList: List<VoiceType>) {
+fun VoiceSelector(selectedVoice: MutableIntState, viewState: MainViewState.MakingVodle,) {
     val interactionSource = remember { MutableInteractionSource() }
     Column(
         modifier = Modifier
@@ -46,7 +47,7 @@ fun VoiceSelector(selectedVoice: MutableIntState, voiceTypeList: List<VoiceType>
                 modifier = Modifier
                     .weight(1f)
                     .padding(vertical = 4.dp),
-                text = voiceTypeList[selectedVoice.intValue].korean,
+                text = viewState.voiceInfoList[selectedVoice.intValue].voiceTypeKr,
                 style = vodleTypoGraphy.titleMedium,
                 textAlign = TextAlign.Center
             )
@@ -56,7 +57,7 @@ fun VoiceSelector(selectedVoice: MutableIntState, voiceTypeList: List<VoiceType>
                     interactionSource = interactionSource,
                     indication = null
                 ) {
-                    if (selectedVoice.intValue < voiceTypeList.lastIndex) {
+                    if (selectedVoice.intValue < viewState.voiceInfoList.lastIndex) {
                         selectedVoice.intValue += 1
                     }
                 },
