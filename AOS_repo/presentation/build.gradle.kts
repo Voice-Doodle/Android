@@ -127,7 +127,7 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer-hls:1.3.0")
     implementation("androidx.media3:media3-ui:1.3.0")
 
-    implementation("com.google.accompanist:accompanist-webview:0.24.13-rc" )
+    implementation("com.google.accompanist:accompanist-webview:0.24.13-rc")
 
     implementation(project(":domain"))
 }
