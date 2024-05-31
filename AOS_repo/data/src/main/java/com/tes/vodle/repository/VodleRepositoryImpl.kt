@@ -1,6 +1,5 @@
 package com.tes.vodle.repository
 
-import android.util.Log
 import com.tes.domain.model.AudioData
 import com.tes.domain.model.Gender
 import com.tes.domain.model.Location
@@ -13,12 +12,12 @@ import java.io.File
 import javax.inject.Inject
 
 class VodleRepositoryImpl @Inject constructor(
-    private val vodleDataSource: VodleDataSource,
+    private val vodleDataSource: VodleDataSource
 ) : VodleRepository {
     override suspend fun fetchVodlesAround(
         centerLocation: Location,
         northEastLocation: Location,
-        southWestLocation: Location,
+        southWestLocation: Location
     ): Result<List<Vodle>> =
         vodleDataSource.fetchVodlesAround(
             centerLocation,
@@ -48,7 +47,7 @@ class VodleRepositoryImpl @Inject constructor(
         writer: String,
         recordType: RecordType,
         streamingUrl: String,
-        location: Location,
+        location: Location
     ): Result<Unit> =
         vodleDataSource.uploadVodle(
             recordingFile,
@@ -68,14 +67,14 @@ class VodleRepositoryImpl @Inject constructor(
     override suspend fun convertVoice(
         recordingFile: File,
         selectedVoice: String,
-        gender: Gender,
+        gender: Gender
     ): Result<AudioData> =
         vodleDataSource.convertVoice(recordingFile, selectedVoice, gender).fold(
             onSuccess = { it ->
                 Result.success(
                     AudioData(
                         it.data.selectedVoice,
-                        it.data.convertedFileUrl,
+                        it.data.convertedFileUrl
                     )
                 )
             },
@@ -102,7 +101,9 @@ class VodleRepositoryImpl @Inject constructor(
     override suspend fun fetchVoiceInfo(): Result<List<VoiceInfo>> =
         vodleDataSource.fetchVoiceInfo().fold(
             onSuccess = { it ->
-                Result.success(it.data.map { VoiceInfo(it.voiceType, it.sampleUrl, it.voiceTypeKr) })
+                Result.success(
+                    it.data.map { VoiceInfo(it.voiceType, it.sampleUrl, it.voiceTypeKr) }
+                )
             },
             onFailure = { Result.failure(it) }
         )

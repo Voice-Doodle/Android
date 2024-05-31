@@ -31,7 +31,7 @@ internal fun VoiceIntroductionView(
     selectedVoiceIndex: MutableIntState,
     viewState: MainViewState.MakingVodle,
     context: Context,
-    player:ExoPlayer
+    player: ExoPlayer
 ) {
     Dialog(
         onDismissRequest = {

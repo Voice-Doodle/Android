@@ -1,6 +1,5 @@
 package com.tes.presentation.main
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.tes.domain.model.Gender
 import com.tes.domain.model.RecordType
@@ -29,7 +28,7 @@ class MainViewModel @Inject constructor(
     private val uploadVodleUseCase: UploadVodleUseCase,
     private val convertRecordingUseCase: ConvertRecordingUseCase,
     private val convertTTSUseCase: ConvertTTSUseCase,
-    private val fetchVoiceInfoUseCase: FetchVoiceInfoUseCase,
+    private val fetchVoiceInfoUseCase: FetchVoiceInfoUseCase
 ) : BaseViewModel<MainViewState, MainViewEvent>() {
     override fun createInitialState(): MainViewState =
         MainViewState.Default()
@@ -141,7 +140,7 @@ class MainViewModel @Inject constructor(
     private fun searchVodlesAround(
         centerLocation: Location,
         northEastLocation: Location,
-        southWestLocation: Location,
+        southWestLocation: Location
     ) {
         viewModelScope.launch {
             fetchVodlesAroundUseCase(centerLocation, northEastLocation, southWestLocation).fold(
@@ -189,7 +188,7 @@ class MainViewModel @Inject constructor(
     private suspend fun convertRecording(
         recordingFile: File,
         selectedVoice: String,
-        gender: Gender,
+        gender: Gender
     ): Result<String> =
         convertRecordingUseCase(recordingFile, selectedVoice, gender).fold(
             onSuccess = {
@@ -240,7 +239,7 @@ class MainViewModel @Inject constructor(
     private fun MainViewState.onFinishConversion(
         recordingFile: File = File(""),
         voiceType: String,
-        convertedUrl: Url,
+        convertedUrl: Url
     ): MainViewState {
         return when (this) {
             is MainViewState.Default -> this
@@ -262,7 +261,7 @@ class MainViewModel @Inject constructor(
         writer: String,
         recordType: RecordType,
         streamingUrl: String,
-        location: Location,
+        location: Location
     ) {
         setState { setLoading() }
         viewModelScope.launch {
@@ -309,7 +308,7 @@ class MainViewModel @Inject constructor(
 
 private fun MainViewState.updateVodles(
     vodleMap: HashMap<Location, List<Vodle>>,
-    vodleList: List<Vodle>,
+    vodleList: List<Vodle>
 ): MainViewState {
     return when (this) {
         is MainViewState.Default -> {
@@ -328,7 +327,7 @@ private fun MainViewState.updateVodles(
                 vodleMap = vodleMap,
                 vodleList = vodleList,
                 isLoading = false,
-                toastMessage = "보들 불러오기 성공",
+                toastMessage = "보들 불러오기 성공"
             )
         }
     }
@@ -364,7 +363,7 @@ private fun MainViewState.showToast(message: String): MainViewState {
 
 private fun MainViewState.onStartRecord(
     location: Location,
-    vodleOption: VodleOption = VodleOption.VOICE,
+    vodleOption: VodleOption = VodleOption.VOICE
 ): MainViewState {
     return when (this) {
         is MainViewState.Default -> MainViewState.MakingVodle(
@@ -389,7 +388,7 @@ private fun MainViewState.onStartRecord(
 
 private fun MainViewState.onClickMarker(
     myLocation: Location,
-    locationList: List<Location>,
+    locationList: List<Location>
 ): MainViewState {
     val dialogVodleList = locationList.map { location -> vodleMap[location] }
         .flatMap { vodleList -> vodleList.orEmpty() }

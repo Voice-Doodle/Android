@@ -1,6 +1,5 @@
 package com.tes.presentation.main.recording
 
-import android.util.Log
 import androidx.annotation.OptIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,7 +22,7 @@ import com.tes.presentation.model.VodleOption
 internal fun IntroDuctionDialog(
     viewModel: MainViewModel,
     viewState: MainViewState.MakingVodle,
-    player: ExoPlayer,
+    player: ExoPlayer
 ) {
     val context = LocalContext.current
     val selectedVoiceIndex = remember { mutableIntStateOf(0) }
@@ -54,7 +53,9 @@ internal fun IntroDuctionDialog(
 
     LaunchedEffect(selectedVoiceIndex.intValue) {
         viewModel.onTriggerEvent(
-            MainViewEvent.OnSelectVoiceType(viewState.voiceInfoList[selectedVoiceIndex.intValue].voiceType)
+            MainViewEvent.OnSelectVoiceType(
+                viewState.voiceInfoList[selectedVoiceIndex.intValue].voiceType
+            )
         )
     }
 
@@ -66,7 +67,9 @@ internal fun IntroDuctionDialog(
 
             else -> {
                 player.stop()
-                val streamingUrl = viewState.voiceInfoList.find { it.voiceType == viewState.selectedVoiceType}?.sampleUrl?: ""
+                val streamingUrl =
+                    viewState.voiceInfoList
+                        .find { it.voiceType == viewState.selectedVoiceType }?.sampleUrl ?: ""
                 val hlsMediaSource =
                     HlsMediaSource.Factory(dataSourceFactory)
                         .createMediaSource(
@@ -83,7 +86,9 @@ internal fun IntroDuctionDialog(
 
     LaunchedEffect(selectedGenderState.value) {
         viewModel.onTriggerEvent(
-            MainViewEvent.OnSelectVoiceType(viewState.voiceInfoList[selectedVoiceIndex.intValue].voiceType)
+            MainViewEvent.OnSelectVoiceType(
+                viewState.voiceInfoList[selectedVoiceIndex.intValue].voiceType
+            )
         )
     }
 }

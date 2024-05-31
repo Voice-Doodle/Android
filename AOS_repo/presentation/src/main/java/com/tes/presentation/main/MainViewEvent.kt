@@ -9,7 +9,7 @@ import java.io.File
 
 sealed class MainViewEvent : ViewEvent {
 
-    data object Init: MainViewEvent()
+    data object Init : MainViewEvent()
 
     data class OnClickSearchVodleButton(
         val centerLocation: Location,
@@ -52,7 +52,8 @@ sealed class MainViewEvent : ViewEvent {
 
     data object OnFinishToast : MainViewEvent()
 
-    data class OnClickMarker(val myLocation: Location, val locationList: List<Location>) : MainViewEvent()
+    data class OnClickMarker(val myLocation: Location, val locationList: List<Location>) :
+        MainViewEvent()
 
     data object OnDismissVodleDialog : MainViewEvent()
 

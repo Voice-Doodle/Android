@@ -12,7 +12,7 @@ enum class Gender(val value: String) {
 
 data class AudioData(
     val voiceType: String,
-    val convertedAudioUrl: Url,
+    val convertedAudioUrl: Url
 )
 
 typealias Url = String

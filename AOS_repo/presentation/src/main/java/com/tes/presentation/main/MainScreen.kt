@@ -38,7 +38,7 @@ import com.tes.presentation.main.recording.TypingDialog
 @Composable
 internal fun MainScreen(
     viewModel: MainViewModel = hiltViewModel<MainViewModel>(),
-    onClickUserButton: () -> Unit,
+    onClickUserButton: () -> Unit
 ) {
     val viewState = viewModel.uiState.collectAsState().value
 
@@ -149,7 +149,7 @@ internal fun MainScreen(
 private fun ObserveToastMessage(
     viewState: MainViewState,
     snackBarHostState: SnackbarHostState,
-    viewModel: MainViewModel,
+    viewModel: MainViewModel
 ) {
     LaunchedEffect(key1 = viewState.toastMessage) {
         if (viewState.toastMessage.isNotEmpty()) {

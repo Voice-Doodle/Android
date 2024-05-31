@@ -22,7 +22,7 @@ sealed class MainViewState : ViewState {
         override val toastMessage: String = "",
         override val vodleList: List<Vodle> = emptyList(),
         override val isLoading: Boolean = false,
-        override val voiceInfoList: List<VoiceInfo> = listOf(VoiceInfo("original", "", "내 목소리")),
+        override val voiceInfoList: List<VoiceInfo> = listOf(VoiceInfo("original", "", "내 목소리"))
     ) : MainViewState()
 
     data class MakingVodle(
@@ -37,7 +37,7 @@ sealed class MainViewState : ViewState {
         val selectedVoiceType: String = "original",
         val gender: Gender = Gender.Male,
         override val isLoading: Boolean = false,
-        override val voiceInfoList: List<VoiceInfo> = listOf(),
+        override val voiceInfoList: List<VoiceInfo> = listOf()
     ) : MainViewState()
 
     data class ShowRecordedVodle(
@@ -47,6 +47,6 @@ sealed class MainViewState : ViewState {
         override val isLoading: Boolean = false,
         val dialogVodleList: List<Vodle>,
         val myLocation: Location,
-        override val voiceInfoList: List<VoiceInfo> = listOf(),
+        override val voiceInfoList: List<VoiceInfo> = listOf()
     ) : MainViewState()
 }

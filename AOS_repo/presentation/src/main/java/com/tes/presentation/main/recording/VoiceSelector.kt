@@ -18,11 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.tes.presentation.R
 import com.tes.presentation.main.MainViewState
-import com.tes.presentation.model.VoiceInfo
 import com.tes.presentation.theme.vodleTypoGraphy
 
 @Composable
-fun VoiceSelector(selectedVoice: MutableIntState, viewState: MainViewState.MakingVodle,) {
+fun VoiceSelector(selectedVoice: MutableIntState, viewState: MainViewState.MakingVodle) {
     val interactionSource = remember { MutableInteractionSource() }
     Column(
         modifier = Modifier
