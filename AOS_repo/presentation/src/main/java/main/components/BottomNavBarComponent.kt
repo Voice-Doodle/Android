@@ -48,15 +48,17 @@ fun BottomNavBarComponent(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            BottomNavButtonComponent(
-                imageVector = Icons.Outlined.Draw,
-                flag = flag,
-                onClick = onClickWriteButton,
-                info = "보들 그리기",
-                modifier = Modifier
-                    .weight(1f)
-                    .height(70.dp)
-            )
+            //tts 버튼 임시로 막음
+//            BottomNavButtonComponent(
+//                imageVector = Icons.Outlined.Draw,
+//                flag = flag,
+//                onClick = onClickWriteButton,
+//                info = "보들 그리기",
+//                modifier = Modifier
+//                    .weight(1f)
+//                    .height(70.dp)
+//            )
+
 //            BottomNavButtonComponent(
 //                imageVector = Icons.Outlined.Headphones,
 //                flag = flag,
