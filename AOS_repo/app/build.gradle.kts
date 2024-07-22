@@ -14,11 +14,11 @@ val properties = Properties().apply {
 }
 
 android {
-    namespace = "com.tes.vodle"
+    namespace = "com.tes.vodleapp"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.tes.vodle"
+        applicationId = "com.tes.vodleapp"
         minSdk = libs.versions.minSDK.get().toInt()
         targetSdk = libs.versions.targetSDK.get().toInt()
         versionCode = libs.versions.versionCode.get().toInt()

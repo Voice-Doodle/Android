@@ -1,0 +1,58 @@
+package com.tes.vodleapp.api
+
+import com.google.gson.annotations.SerializedName
+import com.tes.vodleapp.model.BasicResponse
+import com.tes.vodleapp.model.vodle.ConversionResponse
+import com.tes.vodleapp.model.vodle.TTSConversionRequest
+import com.tes.vodleapp.model.vodle.VodlesAroundRequest
+import com.tes.vodleapp.model.vodle.VodlesAroundResponse
+import com.tes.vodleapp.model.vodle.VoiceInfoResponse
+import okhttp3.MultipartBody
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.Path
+
+interface VodleService {
+    @POST("api/vodle/search")
+    suspend fun fetchVodlesAround(
+        @Body vodlesAroundRequest: VodlesAroundRequest
+    ): VodlesAroundResponse
+
+    @Multipart
+    @POST("api/vodle")
+    suspend fun uploadVodle(
+        @Part soundFile: MultipartBody.Part,
+        @Part("vodleCreateReqDto") vodleMetaData: VodleMetaData
+    ): BasicResponse
+
+    /***
+     * @param selectedVoice
+     * "ahri", "mundo", "optimusPrime", "trump", "elsa" 중 하나의 목소리 선택
+     */
+    @Multipart
+    @POST("api/vodle/conversion/{selected_voice}/{gender}")
+    suspend fun convertVoice(
+        @Part soundFile: MultipartBody.Part,
+        @Path(value = "selected_voice") selectedVoice: String = "mundo",
+        @Path(value = "gender") gender: String = "male"
+    ): ConversionResponse
+
+    @POST("api/vodle/tts")
+    suspend fun convertTTS(
+        @Body ttsConversionRequest: TTSConversionRequest
+    ): ConversionResponse
+
+    @GET("api/vodle/samples")
+    suspend fun fetchVoiceTypes(): VoiceInfoResponse
+}
+
+data class VodleMetaData(
+    @SerializedName("writer") val writer: String = " 익명",
+    @SerializedName("recordType") val recordType: String = "TTS",
+    @SerializedName("streamingURL") val streamingURL: String = "test",
+    @SerializedName("latitude") val longitude: Double = 128.41647,
+    @SerializedName("longitude") val latitude: Double = 36.10714
+)
