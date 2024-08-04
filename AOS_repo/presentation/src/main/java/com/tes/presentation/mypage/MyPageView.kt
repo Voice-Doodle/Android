@@ -30,15 +30,15 @@ internal fun MyPageView(
             modifier = Modifier.padding(top = 24.dp, bottom = 12.dp),
             onClickText = { viewModel.onTriggerEvent(MyPageViewEvent.OnClickMyVodleLog) },
             text = "내 낙서기록",
-            textStyle = vodleTypoGraphy.bodyMedium.merge(TextStyle(fontSize = 24.sp)),
+            textStyle = vodleTypoGraphy.bodyMedium.merge(TextStyle(fontSize = 28.sp)),
             strokeColor = Color.White,
             strokeWidth = 1f
         )
         OutLinedText(
             modifier = Modifier.padding(vertical = 12.dp),
             onClickText = { viewModel.onTriggerEvent(MyPageViewEvent.OnClickPrivacyPolicy) },
-            text = "개인정보처리방침/\n서비스 이용약관",
-            textStyle = vodleTypoGraphy.bodyMedium.merge(TextStyle(fontSize = 24.sp)),
+            text = "개인정보처리방침/\n\n서비스 이용약관",
+            textStyle = vodleTypoGraphy.bodyMedium.merge(TextStyle(fontSize = 28.sp)),
             strokeColor = Color.White,
             strokeWidth = 1f
         )
@@ -46,7 +46,7 @@ internal fun MyPageView(
             modifier = Modifier.padding(vertical = 12.dp),
             onClickText = { viewModel.onTriggerEvent(MyPageViewEvent.OnClickLogout) },
             text = "로그아웃",
-            textStyle = vodleTypoGraphy.bodyMedium.merge(TextStyle(fontSize = 24.sp)),
+            textStyle = vodleTypoGraphy.bodyMedium.merge(TextStyle(fontSize = 28.sp)),
             strokeColor = Color.White,
             strokeWidth = 1f
         )
@@ -58,7 +58,7 @@ internal fun MyPageView(
                 )
             },
             text = "회원탈퇴",
-            textStyle = vodleTypoGraphy.bodySmall.merge(TextStyle(fontSize = 16.sp)),
+            textStyle = vodleTypoGraphy.bodySmall.merge(TextStyle(fontSize = 20.sp)),
             strokeColor = Color.White,
             strokeWidth = 1f
         )
