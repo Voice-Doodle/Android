@@ -22,7 +22,7 @@ internal fun MyPageView(
         modifier = Modifier
             .fillMaxSize()
             .background(main_coral_bright)
-            .padding(horizontal = 32.dp, vertical = 24.dp)
+            .padding(horizontal = 32.dp, vertical = 32.dp)
     ) {
         TopBar(onClickBackButton, "마이페이지")
 
